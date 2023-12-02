@@ -28,7 +28,6 @@ fn string_to_digit(s: &str) -> u32 {
 fn digit_or_spelled(input: &str) -> u32 {
     let regex = Regex::new("one|two|three|four|five|six|seven|eight|nine|1|2|3|4|5|6|7|8|9").unwrap();
     let revex = Regex::new("eno|owt|eerht|ruof|evif|xis|neves|thgie|enin|1|2|3|4|5|6|7|8|9").unwrap();
-    // let regex = Regex::new("1|2|3|4|5|6|7|8|9").unwrap();
     input.lines().par_bridge().map(|s| {
         let rev = s.chars().rev().collect::<String>();
         let first = string_to_digit(regex.find(s).unwrap().into());
