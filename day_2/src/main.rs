@@ -4,9 +4,11 @@ use rayon::prelude::{ParallelBridge, ParallelIterator};
 fn main() {
     let sample = include_str!("../input/sample.txt");
     let input = include_str!("../input/input.txt");
-    let _cubes = RGB{r: 12, g: 13, b: 14};
-    println!("SAMPLE: {}", min_games(sample));
-    println!("INPUT: {}", min_games(input));
+    let cubes = RGB{r: 12, g: 13, b: 14};
+    println!("SAMPL1: {}", possible_games(&cubes, sample));
+    println!("INPUT1: {}", possible_games(&cubes, input));
+    println!("SAMPL2: {}", min_games(sample));
+    println!("INPUT2: {}", min_games(input));
 }
 
 struct RGB {
@@ -33,7 +35,7 @@ fn min_games(s: &str) -> u32 {
     }).sum()
 }
 
-fn _possible_games(cubes: &RGB, s: &str) -> usize {
+fn possible_games(cubes: &RGB, s: &str) -> usize {
     s.lines().enumerate().par_bridge().filter_map(|(i, l)| {
         let l = l.split(": ").skip(1).next().unwrap();
         if l.split("; ").flat_map(|g| g.split(", ")).all(|snip| {

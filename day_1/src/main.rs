@@ -3,11 +3,12 @@ use regex::Regex;
 
 fn main() {
     let sample = include_str!("../input/sample.txt");
-    // let sample2 = include_str!("../input/sample2.txt");
+    let sample2 = include_str!("../input/sample2.txt");
     let input = include_str!("../input/input.txt");
-    println!("SAMPLE: {}", digit_or_spelled(sample));
-    // println!("SAMPLE2: {}", digit_or_spelled(sample2));
-    println!("INPUT: {}", digit_or_spelled(input));
+    println!("SAMPL1: {}", add_digits(sample));
+    println!("INPUT1: {}", add_digits(input));
+    println!("SAMPL2: {}", digit_or_spelled(sample2));
+    println!("INPUT2: {}", digit_or_spelled(input));
 }
 
 fn string_to_digit(s: &str) -> u32 {
@@ -36,10 +37,10 @@ fn digit_or_spelled(input: &str) -> u32 {
     }).sum::<u32>()
 }
 
-fn _add_digits(input: &str) -> u32 {
-    input.lines().par_bridge().map(|s| {
+fn add_digits(input: &str) -> u32 {
+    input.lines().map(|s| {
         let first = s.bytes().find(|b| *b > b'0' &&  *b <= b'9').unwrap() - b'0';
-        let last = s.bytes().find(|b| *b > b'0' &&  *b <= b'9').unwrap() - b'0';
+        let last = s.bytes().rfind(|b| *b > b'0' &&  *b <= b'9').unwrap() - b'0';
         (first * 10 + last) as u32
     }).sum::<u32>()
 }

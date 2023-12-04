@@ -5,30 +5,32 @@ use rayon::iter::ParallelIterator;
 fn main() {
     let sample = include_str!("../input/sample.txt");
     let input = include_str!("../input/input.txt");
-    println!("SAMPLE: {}", gear_ratio(sample));
-    println!("INPUT: {}", gear_ratio(input));
+    println!("SAMPL1: {}", gear_parts(sample));
+    println!("INPUT1: {}", gear_parts(input));
+    println!("SAMPL2: {}", gear_ratio(sample));
+    println!("INPUT2: {}", gear_ratio(input));
 }
 
 fn is_digit(b: u8) -> bool {
     b'0' <= b  && b <= b'9'
 }
 
-fn _is_symbol(b: u8) -> bool {
+fn is_symbol(b: u8) -> bool {
     !is_digit(b) && b != b'.'
 }
 
-fn _adj_part_num((sum, cur, adj): (u32, u32, bool), ((a, b, c),(d, e, f),(g, h, i)): ((u8, u8, u8),(u8, u8, u8),(u8, u8, u8))) -> (u32, u32, bool) {
+fn adj_part_num((sum, cur, adj): (u32, u32, bool), ((a, b, c),(d, e, f),(g, h, i)): ((u8, u8, u8),(u8, u8, u8),(u8, u8, u8))) -> (u32, u32, bool) {
     if b'0' <= e  && e <= b'9' {
         let cur = cur * 10 + (e - b'0') as u32;
         let adj = adj || 
-                _is_symbol(a) ||
-                _is_symbol(b) ||
-                _is_symbol(c) ||
-                _is_symbol(d) ||
-                _is_symbol(f) ||
-                _is_symbol(g) ||
-                _is_symbol(h) ||
-                _is_symbol(i);
+                is_symbol(a) ||
+                is_symbol(b) ||
+                is_symbol(c) ||
+                is_symbol(d) ||
+                is_symbol(f) ||
+                is_symbol(g) ||
+                is_symbol(h) ||
+                is_symbol(i);
         (sum, cur, adj)
     } else {
         let sum = if adj {
@@ -96,11 +98,11 @@ fn gear_ratio(schematic: &str) -> u32 {
     }).sum()
 }
 
-fn _gear_parts(schematic: &str) -> u32 {
+fn gear_parts(schematic: &str) -> u32 {
     // is it possible to get the types for this to work?
     // Some(std::iter::repeat(b'.')).iter()
     let line_len = schematic.lines().next().unwrap().len();
     let line = (0..line_len).map(|_| '.').collect::<String>();
     let lines = [line.as_str()].into_iter().chain(schematic.lines()).chain([line.as_str()].into_iter());
-    lines.map(|l| [b'.'].into_iter().chain(l.bytes()).chain([b'.', b'.'].into_iter())).tuple_windows::<(_,_,_)>().par_bridge().map(|(a, b, c)| izip!(a, b, c).tuple_windows::<(_,_,_)>().fold((0, 0, false), _adj_part_num)).map(|(s, _, _)| s).sum()
+    lines.map(|l| [b'.'].into_iter().chain(l.bytes()).chain([b'.', b'.'].into_iter())).tuple_windows::<(_,_,_)>().par_bridge().map(|(a, b, c)| izip!(a, b, c).tuple_windows::<(_,_,_)>().fold((0, 0, false), adj_part_num)).map(|(s, _, _)| s).sum()
 }
