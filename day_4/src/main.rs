@@ -11,7 +11,6 @@ fn main() {
     println!("INPUT2: {}", card_copies(input));
 }
 
-// requires the arrays be sorted;
 struct OrderedTraverse<T: Ord + Copy> {
     unique: Vec<T>,
     repeated: Vec<T>,
