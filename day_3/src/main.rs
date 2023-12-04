@@ -142,7 +142,7 @@ fn gear_parts(schematic: &str) -> u32 {
             izip!(a, b, c)
                 .tuple_windows::<(_, _, _)>()
                 .fold((0, 0, false), adj_part_num)
+                .0
         })
-        .map(|(s, _, _)| s)
         .sum()
 }
