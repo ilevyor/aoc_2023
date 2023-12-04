@@ -91,8 +91,6 @@ fn adj_gear_ratio(
 }
 
 fn gear_ratio(schematic: &str) -> u32 {
-    // is it possible to get the types for this to work?
-    // Some(std::iter::repeat(b'.')).iter()
     let line_len = schematic.lines().next().unwrap().len();
     let line = (0..line_len).map(|_| '.').collect::<String>();
     let lines = [line.as_str()]
@@ -125,8 +123,6 @@ fn gear_ratio(schematic: &str) -> u32 {
 }
 
 fn gear_parts(schematic: &str) -> u32 {
-    // is it possible to get the types for this to work?
-    // Some(std::iter::repeat(b'.')).iter()
     let line_len = schematic.lines().next().unwrap().len();
     let line = (0..line_len).map(|_| '.').collect::<String>();
     let lines = [line.as_str()]
