@@ -11,17 +11,18 @@ fn main() {
     println!("INPUT2: {}", digit_or_spelled(input));
 }
 
+#[rustfmt::skip]
 fn string_to_digit(s: &str) -> u32 {
     match s {
-        "1" | "one" | "eno" => 1,
-        "2" | "two" | "owt" => 2,
+        "1" | "one"   | "eno" => 1,
+        "2" | "two"   | "owt" => 2,
         "3" | "three" | "eerht" => 3,
-        "4" | "four" | "ruof" => 4,
-        "5" | "five" | "evif" => 5,
-        "6" | "six" | "xis" => 6,
+        "4" | "four"  | "ruof" => 4,
+        "5" | "five"  | "evif" => 5,
+        "6" | "six"   | "xis" => 6,
         "7" | "seven" | "neves" => 7,
         "8" | "eight" | "thgie" => 8,
-        "9" | "nine" | "enin" => 9,
+        "9" | "nine"  | "enin" => 9,
         _ => panic!("invalid string"),
     }
 }
