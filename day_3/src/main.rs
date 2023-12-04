@@ -85,7 +85,7 @@ fn gear_ratio(schematic: &str) -> u32 {
     let line_len = schematic.lines().next().unwrap().len();
     let line = (0..line_len).map(|_| '.').collect::<String>();
     let lines = [line.as_str()].into_iter().chain(schematic.lines()).chain([line.as_str()].into_iter());
-    lines.map(|l| [b'.'].into_iter().chain(l.bytes()).chain([b'.', b'.'].into_iter())).tuple_windows::<(_,_,_)>().map(|(a, b, c)| {
+    lines.map(|l| [b'.'].into_iter().chain(l.bytes()).chain([b'.', b'.'].into_iter())).tuple_windows::<(_,_,_)>().par_bridge().map(|(a, b, c)| {
         let mut top = vec![0];
         let mut mid = vec![0];
         let mut bot = vec![0];
