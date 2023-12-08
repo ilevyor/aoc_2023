@@ -8,9 +8,9 @@ fn main() {
     let sample1 = include_str!("../input/sample1.txt");
     let sample2 = include_str!("../input/sample2.txt");
     let input = include_str!("../input/input.txt");
-    // println!("SAMPL1: {}", follow_map(sample));
-    // println!("SAMPL2: {}", follow_map(sample1));
-    // println!("INPUT1: {}", follow_map(input));
+    println!("SAMPL1: {}", follow_map(sample));
+    println!("SAMPL2: {}", follow_map(sample1));
+    println!("INPUT1: {}", follow_map(input));
     println!("SAMPL3: {}", follow_map_crt(sample2));
     println!("INPUT2: {}", follow_map_crt(input));
 }
